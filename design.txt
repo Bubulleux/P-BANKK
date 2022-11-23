@@ -10,5 +10,5 @@
         |                   |-- "réaliser un virement entre 2 comptes" --> input str  nom/prénom ou int numéro client + int montant forcément positif
         |                   |-- "supprimer le compte" input "êtes vous sur ? Y/n"
         |
-        |--menu général |-- "actualiser tous les soldes des comptes épargnes en fnct de leurs taux" input "êtes vous sur ? Y/n"
+        |--menu général-|-- "actualiser tous les soldes des comptes épargnes en fnct de leurs taux" input "êtes vous sur ? Y/n"
                         |-- "récupérer la liste des mails des personnes à découvert"
