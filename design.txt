@@ -1,0 +1,14 @@
+--search|-- "rechercher par nom et prénom"      |
+        |-- "recherche par numéro de client"    |--> afficher comptes epargne + comptes courants & update menu (l9)
+\\search : paramettres booléens "epargne", "courant" --> décide qu'est ce qui est renvoyé (False : contenu non renvoyé, True : contenu renvoyé)
+\\si une recherche donne plusieurs comptes différents, menu de choix entre les différents comptes
+
+--look at|-- "consulter les comptes courants d'un client" --> interface "search" --> afficher uniquement comptes courants
+         |-- "consulter les comptes épargnes d'un client" --> interface "search" --> afficher uniquement comptes epargnes
+
+--update|--menu d'un client-|-- "modifier l'autorisation de découvert d'un compte" --> input int forcément négatif
+        |                   |-- "réaliser un virement entre 2 comptes" --> input str  nom/prénom ou int numéro client + int montant forcément positif
+        |                   |-- "supprimer le compte" input "êtes vous sur ? Y/n"
+        |
+        |--menu général |-- "actualiser tous les soldes des comptes épargnes en fnct de leurs taux" input "êtes vous sur ? Y/n"
+                        |-- "récupérer la liste des mails des personnes à découvert"
