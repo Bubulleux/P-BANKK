@@ -26,7 +26,7 @@ CREATE TABLE "savings_accounts" (
 );
 
 INSERT INTO clients(id_client, name, email) VALUES
-    (1, "Body", "boby@gmail.com"),
+    (1, "Boby", "boby@gmail.com"),
     (2, "François", "notre_belle_france@gmail.com"),
     (3, "Amed", "amed@gmail.com"),
     (4, "Jackson", "america@gmail.com"),
