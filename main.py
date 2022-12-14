@@ -12,13 +12,13 @@ def main_menu(window,db):
 def rechercher_clients(text,db):
     # Bla bla bla tu recherches dans la database et tu l'affiches en appelant d'autres fonctions de wigets
     widgets.destroy_widgets(window)
-    widgets.menu_client(db.get_clients(text))
-    search(window,db)
+    print(db.get_clients(text))
+    widgets.menu_client(window, db.get_clients(text))
 
 def rechercher_clients_par_id(text,db):
     widgets.destroy_widgets(window)
-    widgets.menu_client( db.get_clients_by_id(text))
-    search(window,db)
+    print(db.get_clients_by_id(text))
+    widgets.menu_client(window, db.get_clients_by_id(text))
 
 def input_menu(win,db,text,fnct):
     widgets.destroy_widgets(win)
