@@ -7,6 +7,8 @@ def test():
     
 def search(win,db):
     widgets.menu(win,["rechercher par nom et prénom","recherche par numéro de client"],[lambda : db.get_clients(input("nom prénom de la personne que vous cherchez")),lambda : db.get_client_by_id(input("id du client que vous cherchez"))],"Recherche")
+    
+
 def look_at(win, db):
     pass
 
