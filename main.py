@@ -13,6 +13,7 @@ def rechercher_clients(text,db):
     # Bla bla bla tu recherches dans la database et tu l'affiches en appelant d'autres fonctions de wigets
     widgets.destroy_widgets(window)
     widgets.menu_client(window, db.get_client_current_accounts(text),db.get_client_saving_accounts(text))
+    widgets.create_button(window,row=2,col=0,text="retour au menu principal",function=lambda:main_menu(window,db))
 
 def rechercher_clients_par_id(text,db):
     widgets.destroy_widgets(window)
