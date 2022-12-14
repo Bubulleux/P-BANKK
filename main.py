@@ -7,8 +7,8 @@ def test():
 
 window = tk.Tk()
 window.title("Ma Banque")
-window.geometry("500x100")
+window.geometry("500x300")
 
-widgets.menu(window, ["rechercher par nom et prénom","rechercher par numéro de client"],[test,test],[(10,1),(1,2)],"main menu")
+widgets.menu_client(window, (["header 1","header 2"], ["value 1", "value 2"]), (("header 3", "header 4"), ("value 3", "value 4")))
 
 window.mainloop()
