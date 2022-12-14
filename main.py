@@ -5,9 +5,21 @@ import widgets
 def test():
     print("bouton cliqué")
     
-def search(win,db):
-    widgets.menu(win,["rechercher par nom et prénom","recherche par numéro de client","revenir"],[lambda : db.get_clients(input("nom prénom de la personne que vous cherchez")),lambda : db.get_client_by_id(input("id du client que vous cherchez")),lambda:print("")],"Recherche")
+def main_menu(window,db):
+    widgets.destroy_widgets(window)
+    widgets.menu(window, ["Rechercher", "Ajouter", "Modifier", "Quitter"], [lambda: search(window,db),lambda: look_at(window,db),lambda: update(window,db), window.destroy], "Un titre")
+
+def input_menu(win,text,function):
+    widgets.destroy_widgets(win)
+    return widgets.menu_recherche(win,text,function)
     
+def client_menu(win,dat):
+    widgets.menu_client()
+
+def search(win,db):
+    widgets.destroy_widgets(win)
+    widgets.menu(win,["rechercher par nom et prénom","recherche par numéro de client","revenir"],[lambda : db.get_clients(input_menu(win,"nom prénom de la personne que vous cherchez")),lambda : db.get_client_by_id(input_menu(win,"id du client que vous cherchez")),lambda:main_menu(win,db)],"Recherche")
+
 def look_at(win, db):
     pass
 
@@ -20,7 +32,6 @@ window.title("Ma Banque")
 window.geometry("500x300")
 
 #widgets.menu_client(window, (["header 1","header 2"], ["value 1", "value 2"]), (("header 3", "header 4"), ("value 3", "value 4")))
-
-widgets.menu(window, ["Rechercher", "Ajouter", "Modifier", "Quitter"], [lambda: search(window,db),lambda: look_at(window,db),lambda: update(window,db), window.destroy], "Un titre")
+main_menu(window,db)
 
 window.mainloop()
