@@ -1,14 +1,26 @@
 import tkinter as tk
-import bank_data_handler
+import bank_data_handler as dh
 import widgets
 
 def test():
     print("bouton cliqué")
+    
+def search(win,db):
+    widgets.menu(win,["rechercher par nom et prénom","recherche par numéro de client"],[
+        lambda : db.get_clients(input("nom prénom de la personne que vous cherchez")),
+        lambda : db.get_client_by_id(input("id du client que vous cherchez"))
+        ])
 
+def look_at(win, db):
+    pass
+
+def update(win,db):
+    pass
+
+db=dh.BankDBHandler("data_base.db")
 window = tk.Tk()
 window.title("Ma Banque")
 window.geometry("500x100")
 
-widgets.menu(window, ["rechercher par nom et prénom","rechercher par numéro de client"],[test,test],[(10,1),(1,2)],"main menu")
-
+widgets.menu(window, ["Recherche","Observer un compte","Modifier des informations d'un compte"],[lambda : search(window,db),test,test],[(0,0),(1,2),(1,3)],"main menu")
 window.mainloop()

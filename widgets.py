@@ -3,7 +3,7 @@ import tkinter as tk
 
 def create_button(win, row, col, text, function):
     button = tk.Button(win, text = text, command = function)
-    button.grid(row = row, column = col)
+    button.pack()
 
 def menu_client(win, comptes_courant, comptes_epargne):
     tableau_courant = tk.Frame(win)
@@ -15,6 +15,7 @@ def menu_client(win, comptes_courant, comptes_epargne):
 
 
 def menu(win, text_list, function_list, data_list,name):
-    name=tk.Label(win, text=name)
+    name=tk.Label(win,text=name)
+    name.pack()
     for i in range(len(text_list)):
         create_button(win,data_list[i][1],data_list[i][0], text=text_list[i], function=function_list[i])
