@@ -45,4 +45,6 @@ INSERT INTO savings_accounts(client_id, sold, rate) VALUES
     (1, 3, 5),
     (2, 8299, 1.9),
     (2, 88923, 5),
-    (5, 1, 1.01);
+    (5, 1, 1.01),
+    (1, 0, 5),
+    (1, 5, 0);

@@ -46,15 +46,16 @@ class BankDBHandler:
         return data
 
     def update_all_saving_account(self):
-        pass
+        saving_accounts = self.get_all_saving_account()
+        parameters = [(value[1] * (1 + value[2]), key) for key, value in saving_accounts.items()]
+        self.c.executemany("UPDATE savings_accounts SET sold = ? WHERE id_account = ?", parameters)
+        self.connection.commit()
 
     def set_accounts_overdraft(self, account_id, new_value):
-        if new_value > 0:
+        if new_value > 0 or self.get_current_accounts_by_id(account_id) is None:
             return False
-        try:
-            self.c.execute("UPDATE currents_accounts SET overdraft = ? WHERE id_clients = ?", (new_value, account_id))
-        except Exception as e:
-            return False
+        self.c.execute("UPDATE currents_accounts SET overdraft = ? WHERE id_account = ?", (new_value, account_id))
+        self.connection.commit()
         return True
 
     def transfer_money(self, output_account, input_account, transfer_value):
