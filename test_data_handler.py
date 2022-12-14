@@ -70,7 +70,7 @@ def test_delete_account():
     db = init()
     assert db.delete_current_account(6) == True
     assert db.delete_current_account(6) == False
-    assert db.get_client_current_accounts(5) == []
+    assert db.get_client_current_accounts(5) == {}
     assert db.get_current_accounts_by_id(6) is None
     db.close()
 
@@ -79,7 +79,7 @@ def test_delete_saving_account():
     db = init()
     assert db.delete_saving_account(4) == True
     assert db.delete_saving_account(4) == False
-    assert db.get_client_saving_account(5) == []
+    assert db.get_client_saving_account(5) == {}
     assert db.get_saving_accounts_by_id(4) is None
     db.close()
 
@@ -94,6 +94,6 @@ def test_delete_client():
     assert db.delete_client(5) == False
     assert db.delete_client(5, forced=True) == True
     assert db.get_client_by_id(5) is None
-    assert db.get_client_current_accounts(5) == []
-    assert db.get_client_saving_account(5) == []
+    assert db.get_client_current_accounts(5) == {}
+    assert db.get_client_saving_account(5) == {}
     db.close()
