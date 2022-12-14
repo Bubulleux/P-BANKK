@@ -48,4 +48,4 @@ def menu_recherche(win, text):
     bar.grid(row=0, column=0)
     send.grid(row=0, column=1)
 
-    return search
+    return search.get()
