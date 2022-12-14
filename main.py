@@ -6,8 +6,8 @@ def test():
     print("bouton cliqué")
     
 def search(win,db):
-    widgets.menu(win,["rechercher par nom et prénom","recherche par numéro de client"],[lambda : db.get_clients(input("nom prénom de la personne que vous cherchez")),lambda : db.get_client_by_id(input("id du client que vous cherchez"))],"Recherche")
-
+    widgets.menu(win,["rechercher par nom et prénom","recherche par numéro de client","revenir"],[lambda : db.get_clients(input("nom prénom de la personne que vous cherchez")),lambda : db.get_client_by_id(input("id du client que vous cherchez")),lambda:print("")],"Recherche")
+    
 def look_at(win, db):
     pass
 
@@ -20,6 +20,7 @@ window.title("Ma Banque")
 window.geometry("500x300")
 
 #widgets.menu_client(window, (["header 1","header 2"], ["value 1", "value 2"]), (("header 3", "header 4"), ("value 3", "value 4")))
-widgets.menu(window, ["Rechercher", "Ajouter", "Supprimer", "Quitter"], [test, test, test, window.destroy], "Un titre")
+
+widgets.menu(window, ["Rechercher", "Ajouter", "Modifier", "Quitter"], [lambda: search(window,db),lambda: look_at(window,db),lambda: update(window,db), window.destroy], "Un titre")
 
 window.mainloop()
