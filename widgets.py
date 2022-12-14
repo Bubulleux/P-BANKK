@@ -5,6 +5,10 @@ def create_button(win, row, col, text, function):
     button = tk.Button(win, text=text, command=function)
     button.grid(row=row, column=col)
 
+def destroy_widgets(parent):
+    for child in parent.winfo_children():
+        child.destroy()
+
 def menu_client(win, comptes_courant, comptes_epargne):
     tableau_courant = tk.Frame(win, background="black")
     tableau_epargne = tk.Frame(win, background="black")
@@ -27,6 +31,15 @@ def menu_client(win, comptes_courant, comptes_epargne):
     
     tableau_courant.grid(row=0, column=0)
     tableau_epargne.grid(row=0, column=1)
+
+def menu_recherche(win, text):
+    bar = tk.Entry(win)
+    bar.insert(0, text)
+
+    send = tk.Button(win, text="Rechercher")
+
+    bar.grid(row=0, column=0)
+    send.grid(row=0, column=1)
 
 def menu(win, text_list, function_list,name):
     name=tk.Label(win,text=name)
