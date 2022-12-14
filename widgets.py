@@ -38,14 +38,12 @@ def menu_client(win, comptes_courant, comptes_epargne):
     tableau_courant.grid(row=0, column=0)
     tableau_epargne.grid(row=0, column=1)
 
-def menu_recherche(win, text):
+def menu_recherche(win, text, fonction):
     search = tk.StringVar()
     bar = tk.Entry(win, width=30, textvariable=search)
     bar.insert(0, text)
 
-    send = tk.Button(win, text="Rechercher", command=win.destroy)
+    send = tk.Button(win, text="Rechercher", command=lambda : fonction(search.get()))
 
     bar.grid(row=0, column=0)
     send.grid(row=0, column=1)
-
-    return search.get()
