@@ -17,6 +17,9 @@ def menu(win, text_list, function_list,name):
 
 def menu_client(win, comptes_courant, comptes_epargne):
     """
+    Cette fonction affiche deux tableaux avec les valeurs des comptes
+    courants et des comptes epargnes specifies.
+
     comptes_courant et comptes_epargne sont des listes contenant :
         - les headers (qui s'affichent en haut des tableaux)
         - chaque ligne contenant ses valeurs
@@ -25,19 +28,19 @@ def menu_client(win, comptes_courant, comptes_epargne):
     tableau_courant = tk.Frame(win, background="black")
     tableau_epargne = tk.Frame(win, background="black")
 
-    headers = [tk.Label(tableau_courant, text=header) for header in comptes_courant[0]]
+    headers = [tk.Label(tableau_courant, text="id du compte"), tk.Label(tableau_courant, text="solde"), tk.Label(tableau_courant, text="overdraft")]
     for i, header in enumerate(headers):
         header.grid(row=0, column=i, padx=1, pady=1, sticky=tk.NSEW)
-    for i, compte in enumerate(comptes_courant[1:]):
-        labels = [tk.Label(tableau_courant, text=value) for value in compte]
+    for key in comptes_courant:
+        labels = [tk.Label(tableau_courant, text=key), tk.Label(tableau_courant, text=comptes_courant[key][0]), tk.Label(tableau_courant, text=comptes_courant[key][1])]
         for j, label in enumerate(labels):
             label.grid(row=i + 1, column=j, padx=1, pady=1, sticky=tk.NSEW)
 
-    headers = [tk.Label(tableau_epargne, text=header) for header in comptes_epargne[0]]
+    headers = [tk.Label(tableau_epargne, text="id du compte"), tk.Label(tableau_epargne, text="solde"), tk.Label(tableau_epargne, text="overdraft")]
     for i, header in enumerate(headers):
         header.grid(row=0, column=i, padx=1, pady=1, sticky=tk.NSEW)
-    for i, compte in enumerate(comptes_epargne[1:]):
-        labels = [tk.Label(tableau_epargne, text=value) for value in compte]
+    for key in comptes_epargne:
+        labels = [tk.Label(tableau_epargne, text=key), tk.Label(tableau_epargne, text=comptes_epargne[key][0]), tk.Label(tableau_epargne, text=comptes_epargne[key][1])]
         for j, label in enumerate(labels):
             label.grid(row=i + 1, column=j, padx=1, pady=1, sticky=tk.NSEW)
     
