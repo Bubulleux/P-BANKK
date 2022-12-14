@@ -9,20 +9,27 @@ def main_menu(window,db):
     widgets.destroy_widgets(window)
     widgets.menu(window, ["Rechercher", "Ajouter", "Modifier", "Quitter"], [lambda: search(window,db),lambda: look_at(window,db),lambda: update(window,db), window.destroy], "Un titre")
 
-def rechercher(text,db):
+def rechercher_clients(text,db):
     # Bla bla bla tu recherches dans la database et tu l'affiches en appelant d'autres fonctions de wigets
-    print(text)
+    widgets.destroy_widgets(window)
+    widgets.menu_client(db.get_clients(text))
+    search(window,db)
 
-def input_menu(win,text,db):
+def rechercher_clients_par_id(text,db):
+    widgets.destroy_widgets(window)
+    widgets.menu_client( db.get_clients_by_id(text))
+    search(window,db)
+
+def input_menu(win,db,text,fnct):
     widgets.destroy_widgets(win)
-    (widgets.menu_recherche(win,db,text,rechercher))
+    widgets.menu_recherche(win,db,text,fnct)
     
 def client_menu(win,dat):
     widgets.menu_client()
 
 def search(win,db):
     widgets.destroy_widgets(win)
-    widgets.menu(win,["rechercher par nom et prénom","recherche par numéro de client","revenir"],[lambda : db.get_clients(input_menu(win,"nom prénom de la personne que vous cherchez")),lambda : db.get_client_by_id(input_menu(win,"id du client que vous cherchez")),lambda:main_menu(win,db)],"Recherche")
+    widgets.menu(win,["rechercher par nom et prénom","recherche par numéro de client","revenir"],[lambda : input_menu(win,db,"nom prénom de la personne que vous cherchez",rechercher_clients),lambda : input_menu(win,db,"id du client que vous cherchez",rechercher_clients_par_id),lambda:main_menu(win,db)],"Recherche")
 
 def look_at(win, db):
     pass
