@@ -40,7 +40,7 @@ def test_get_client_saving_account():
 def test_gel_all_bank_account():
     db = init()
     assert len(db.get_all_current_account()) == 7
-    assert len(db.get_all_saving_account()) == 4
+    assert len(db.get_all_saving_account()) == 6
     db.close()
 
 
@@ -96,4 +96,22 @@ def test_delete_client():
     assert db.get_client_by_id(5) is None
     assert db.get_client_current_accounts(5) == {}
     assert db.get_client_saving_account(5) == {}
+    db.close()
+
+
+def test_update_saving_account():
+    db = init()
+    db.update_all_saving_account()
+    assert db.get_saving_accounts_by_id(1)[1] == 18
+    assert db.get_saving_accounts_by_id(5)[1] == 0
+    assert db.get_saving_accounts_by_id(6)[1] == 5
+    db.close()
+
+
+def test_change_account_overdraft():
+    db = init()
+    assert db.set_accounts_overdraft(-1, 1) == False
+    assert db.set_accounts_overdraft(1, 10) == False
+    assert db.set_accounts_overdraft(1, -100) == True
+    assert db.get_current_accounts_by_id(1)[2] == -100
     db.close()
