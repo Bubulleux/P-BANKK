@@ -13,10 +13,12 @@ def rechercher_clients(text,db):
     widgets.destroy_widgets(window)
     widgets.menu_client(window, db.get_client_current_accounts(text),db.get_client_saving_accounts(text))
     cascade_menu(window)
+    
 def rechercher_clients_par_id(text,db):
     widgets.destroy_widgets(window)
     widgets.menu_client(window,  db.get_client_current_accounts_by_id(text),db.get_client_saving_accounts_by_id(text))
     cascade_menu(window)
+    
 #def input_menu(win,db,text,fnct):
  #   widgets.destroy_widgets(win)
   #  widgets.menu_recherche(win,db,text,fnct)
@@ -55,15 +57,17 @@ def cascade_menu(window):
         label='recherche par numéro de client',
         command=lambda: widgets.menu_recherche(window,db,"entrez l'ID client", rechercher_clients_par_id)
     )
+    
 
-    look_menu.add_command(
-    label="consulter les comptes courants d'un client",
-    command=window.destroy
-)
-    look_menu.add_command(
-    label="consulter les comptes épargnes d'un client",
-    command=window.destroy
-)
+#    look_menu.add_command(
+ #   label="consulter les comptes courants d'un client",
+  #  command=widgets.menu_client(window,db.get_client_current_accounts())
+#)
+ #   look_menu.add_command(
+  #  label="consulter les comptes épargnes d'un client",
+   # command=window.destroy
+#)
+
 
     client_menu.add_command(
     label="modifier l'autorisation de découvert d'un compte",
