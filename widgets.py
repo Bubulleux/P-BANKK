@@ -16,7 +16,6 @@ def menu_client(win, comptes_courant, comptes_epargne):
         labels = [tk.Label(tableau_courant, text=value) for value in compte]
         for j, label in enumerate(labels):
             label.grid(row=i + 1, column=j, padx=1, pady=1, sticky=tk.NSEW)
-    tableau_courant.grid(row=0, column=0)
 
     headers = [tk.Label(tableau_epargne, text=key) for key in comptes_epargne[0]]
     for i, header in enumerate(headers):
@@ -25,4 +24,12 @@ def menu_client(win, comptes_courant, comptes_epargne):
         labels = [tk.Label(tableau_epargne, text=value) for value in compte]
         for j, label in enumerate(labels):
             label.grid(row=i + 1, column=j, padx=1, pady=1, sticky=tk.NSEW)
+    
+    tableau_courant.grid(row=0, column=0)
     tableau_epargne.grid(row=0, column=1)
+
+def menu(win, text_list, function_list,name):
+    name=tk.Label(win,text=name)
+    name.grid(row=0, column=0)
+    for i in range(len(text_list)):
+        create_button(win,i + 1,0, text_list[i], function_list[i])
