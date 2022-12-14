@@ -64,22 +64,25 @@ class BankDBHandler:
                        (output_sold - transfer_value, output_account))
         self.c.execute("UPDATE currents_accounts SET sold = ? WHERE id_account = ?",
                        (input_sold + transfer_value, input_account))
+        self.connection.commit()
 
     def delete_current_account(self, account_id):
         if self.get_current_accounts_by_id(account_id) is None:
             return False
-        self.c.execute("DELETE FROM currents_accounts WHERE id_account = ?", account_id)
+        self.c.execute("DELETE FROM currents_accounts WHERE id_account = ?", (account_id,))
+        self.connection.commit()
         return True
 
     def delete_saving_account(self, account_id):
         if self.get_saving_accounts_by_id(account_id) is None:
             return False
-        self.c.execute("DELETE FROM savings_accounts WHERE id_account = ?", account_id)
+        self.c.execute("DELETE FROM savings_accounts WHERE id_account = ?", (account_id,))
+        self.connection.commit()
         return True
 
     def delete_client(self, client_id, forced=False):
-        if not forced and (self.get_client_current_accounts(client_id) != [] or
-                           self.get_client_current_accounts(client_id) != []):
+        if not forced and (self.get_client_current_accounts(client_id) != {} or
+                           self.get_client_saving_account(client_id) != {}):
             return False
 
         for account_id in self.get_client_current_accounts(client_id):
@@ -87,8 +90,6 @@ class BankDBHandler:
         for account_id in self.get_client_saving_account(client_id):
             self.delete_saving_account(account_id)
 
-        self.c.execute("DELETE FROM clients WHERE id_clients = ?", client_id)
-
-
-
-
+        self.c.execute("DELETE FROM clients WHERE id_client = ?", (client_id,))
+        self.connection.commit()
+        return True
