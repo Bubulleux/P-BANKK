@@ -44,8 +44,8 @@ def menu_client(win, comptes_courant, comptes_epargne):
         for j, label in enumerate(labels):
             label.grid(row=i + 1, column=j, padx=1, pady=1, sticky=tk.NSEW)
     
-    tableau_courant.grid(row=0, column=0)
-    tableau_epargne.grid(row=0, column=1)
+    tableau_courant.grid(row=0, column=0, pady=2)
+    tableau_epargne.grid(row=1, column=0, pady=2)
 
 def menu_recherche(win, db, text, fonction):
     search = tk.StringVar()
