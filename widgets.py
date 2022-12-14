@@ -25,7 +25,7 @@ def menu_client(win, comptes_courant, comptes_epargne):
     tableau_courant = tk.Frame(win, background="black")
     tableau_epargne = tk.Frame(win, background="black")
 
-    headers = [tk.Label(tableau_courant, text=key) for key in comptes_courant[0]]
+    headers = [tk.Label(tableau_courant, text=header) for header in comptes_courant[0]]
     for i, header in enumerate(headers):
         header.grid(row=0, column=i, padx=1, pady=1, sticky=tk.NSEW)
     for i, compte in enumerate(comptes_courant[1:]):
@@ -33,7 +33,7 @@ def menu_client(win, comptes_courant, comptes_epargne):
         for j, label in enumerate(labels):
             label.grid(row=i + 1, column=j, padx=1, pady=1, sticky=tk.NSEW)
 
-    headers = [tk.Label(tableau_epargne, text=key) for key in comptes_epargne[0]]
+    headers = [tk.Label(tableau_epargne, text=header) for header in comptes_epargne[0]]
     for i, header in enumerate(headers):
         header.grid(row=0, column=i, padx=1, pady=1, sticky=tk.NSEW)
     for i, compte in enumerate(comptes_epargne[1:]):
