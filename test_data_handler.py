@@ -51,3 +51,31 @@ def test_get_current_saving_by_id():
     assert db.get_saving_accounts_by_id(-1) is None
 
 
+def test_transfer_money():
+    db = init()
+    db.transfer_money(4, 5, 100)
+    assert db.get_current_accounts_by_id(4)[1] == 228
+    assert db.get_current_accounts_by_id(5)[1] == 1937
+
+
+def test_delete_account():
+    db = init()
+    assert db.delete_current_account(6) == True
+    assert db.delete_current_account(6) == False
+    assert db.get_client_banks_current_accounts(5) == []
+    assert db.get_current_accounts_by_id(6) is None
+
+
+def test_delete_saving_account():
+    db = init()
+    assert db.delete_saving_account(4) == True
+    assert db.delete_saving_account(4) == False
+    assert db.get_client_saving_account(5) == []
+    assert db.get_saving_accounts_by_id(4) is None
+
+
+def test_delete_client():
+    db = init()
+    assert db.delete_client(5) == True
+    assert db.get_client_by_id(5) is None
+    assert db.get_client_by_id(5) == ()

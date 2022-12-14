@@ -55,15 +55,20 @@ class BankDBHandler:
         return True
 
     def transfer_money(self, output_account, input_account, transfer_value):
+        output_sold = self.get_current_accounts_by_id(output_account)[1]
+        input_account = self.get_current_accounts_by_id(input_account)[1]
+        self.c.execute("UPADATE currents_accounts SET sold = ? WHERE id_account = ?",
+                       (output_sold - transfer_value, output_account))
+        self.c.execute("UPADATE currents_accounts SET sold = ? WHERE id_account = ?",
+                       (input_account + transfer_value, input_account))
+
+    def delete_current_account(self, account_id):
+        if self.get_s
+
+    def delete_saving_account(self, account_id):
         pass
 
     def delete_client(self, client_id):
-        pass
-
-    def delete_current_account(self, account_id):
-        pass
-
-    def delete_saving_account(self, account_id):
         pass
 
 
