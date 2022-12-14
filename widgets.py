@@ -43,7 +43,7 @@ def menu_recherche(win, text):
     bar = tk.Entry(win, width=30, textvariable=search)
     bar.insert(0, text)
 
-    send = tk.Button(win, text="Rechercher")
+    send = tk.Button(win, text="Rechercher", command=win.destroy)
 
     bar.grid(row=0, column=0)
     send.grid(row=0, column=1)
