@@ -1,18 +1,24 @@
 import tkinter
 import route
+import bank_data_handler
 
 
 class App:
-    def __init__(self):
+    def __init__(self, db):
         self.window = tkinter.Tk()
-        self.page: route.Page = route.MainMenu(self, "Un titre", [("Quitter", self.destroy)])
+        self.db = db
+        self.page: route.Page = route.MainMenu(self, "Un titre", [
+            ("Recherche", self.go_to_search_client),
+            ("Quitter", self.destroy),
+        ])
 
     def main_loop(self):
         self.draw()
         self.window.mainloop()
 
-    def go_to_page(self, page_name):
-        pass
+    def go_to_search_client(self):
+        self.page = route.MenuRecherche(self)
+        self.draw()
 
     def draw(self):
         route.custom_widget.destroy_widgets(self.window)
@@ -23,8 +29,10 @@ class App:
 
 
 def main():
-    app = App()
+    db = bank_data_handler.BankDBHandler("data_base.db")
+    app = App(db)
     app.main_loop()
+    db.close()
 
 
 if __name__ == "__main__":
