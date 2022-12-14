@@ -11,14 +11,14 @@ def main_menu(window,db):
 
 def input_menu(win,text,function):
     widgets.destroy_widgets(win)
-    return widgets.menu_recherche(win,text,function)
+    return widgets.menu_recherche(win,text)
     
 def client_menu(win,dat):
     widgets.menu_client()
 
 def search(win,db):
     widgets.destroy_widgets(win)
-    widgets.menu(win,["rechercher par nom et prénom","recherche par numéro de client","revenir"],[lambda : db.get_clients(input_menu(win,"nom prénom de la personne que vous cherchez")),lambda : db.get_client_by_id(input_menu(win,"id du client que vous cherchez")),lambda:main_menu(win,db)],"Recherche")
+    widgets.menu(win,["rechercher par nom et prénom","recherche par numéro de client","revenir"],[lambda : db.get_clients(input_menu(win,"nom prénom de la personne que vous cherchez",lambda:search(win,db))),lambda : db.get_client_by_id(input_menu(win,"id du client que vous cherchez",lambda:search(win,db))),lambda:main_menu(win,db)],"Recherche")
 
 def look_at(win, db):
     pass
