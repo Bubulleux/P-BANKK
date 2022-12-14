@@ -8,7 +8,7 @@ class App:
     def __init__(self, db):
         self.window = tkinter.Tk()
         self.window.title("Ma Banque")
-        self.window.geometry("800x300")
+        # self.window.geometry("600x300")
         self.db: bank_data_handler.BankDBHandler = db
         self.page: route.Page = route.MainMenu(self)
 
@@ -30,6 +30,10 @@ class App:
 
     def go_to_current_account_page(self, account_id):
         self.page = route.CurrentAccountPage(self, account_id)
+        self.draw()
+
+    def go_to_money_transfer_page(self, account_id):
+        self.page = route.MoneyTransferPage(self, account_id)
         self.draw()
 
     def draw(self):

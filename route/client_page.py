@@ -35,35 +35,39 @@ class ClientPage(Page):
         tk.Label(window, text="Id du client").grid(row=0, column=0)
         tk.Entry(window, width=20, textvariable=self.id_entry).grid(row=0, column=1)
         custom_widget.create_button(window, 0, 2, "Rechercher", self.update_data)
-
         custom_widget.create_button(window, 0, 3, "Menu", self.app.go_to_main_menu)
+
         if self.client_id is None:
-            tk.Label(window, text="Aucun client trouver").grid(row=1, column=0)
+            tk.Label(window, text="Aucun client trouvé").grid(row=1, column=0)
             return
+
         tk.Label(window, text=f"Nom du client: {self.client_name}").grid(row=1, column=0)
         tk.Label(window, text=f"Email du client: {self.client_email}").grid(row=2, column=0)
 
-        tk.Label(window, text=f"Compte courrant:").grid(row=3, column=0)
-        tk.Label(window, text=f"Compte épargne:").grid(row=3, column=2)
+        tk.Label(window, text=f"Comptes courrant:").grid(row=3, column=0)
+        tk.Label(window, text=f"Comptes épargne:").grid(row=3, column=2)
 
         tableau_courant = tk.Frame(window, background="black")
         tableau_epargne = tk.Frame(window, background="black")
 
         headers = [
+            tk.Label(tableau_courant, text="id du compte"),
             tk.Label(tableau_courant, text="solde"),
-            tk.Label(tableau_courant, text="overdraft"),
+            tk.Label(tableau_courant, text="découvert"),
             tk.Label(tableau_courant),
-            tk.Label(tableau_courant),
+            tk.Label(tableau_courant)
         ]
         for i, header in enumerate(headers):
-            header.grid(row=0, column=i, padx=1, pady=1, sticky=tk.NSEW)
+            if header.cget("text") == "":
+                header.grid(row=0, column=i, sticky=tk.NSEW)
+            else:
+                header.grid(row=0, column=i, padx=1, pady=1, sticky=tk.NSEW)
         for i, (key, value) in enumerate(self.client_current_account.items()):
-
             labels = [
                 tk.Label(tableau_courant, text=value[0]),
                 tk.Label(tableau_courant, text=value[1]),
-                tk.Button(tableau_courant, text="Voire le compte",
-                          command=lambda k=key: self.app.go_to_current_account_page(k)),
+                tk.Label(tableau_courant, text=value[2]),
+                tk.Button(tableau_courant, text="Voire le compte", command=lambda k=key: self.app.go_to_current_account_page(k)),
                 tk.Button(tableau_courant, text="Supprimer", command=lambda k=key: self.delete_current_account(k))
             ]
             for j, label in enumerate(labels):
@@ -72,15 +76,20 @@ class ClientPage(Page):
         headers = [
             tk.Label(tableau_epargne, text="id du compte"),
             tk.Label(tableau_epargne, text="solde"),
-            tk.Label(tableau_epargne, text="overdraft")
+            tk.Label(tableau_epargne, text="pourcentage"),
+            tk.Label(tableau_epargne)
         ]
         for i, header in enumerate(headers):
-            header.grid(row=0, column=i, padx=1, pady=1, sticky=tk.NSEW)
+            if header.cget("text") == "":
+                header.grid(row=0, column=i, sticky=tk.NSEW)
+            else:
+                header.grid(row=0, column=i, padx=1, pady=1, sticky=tk.NSEW)
         for i, (key, value) in enumerate(self.client_saving_account.items()):
             labels = [
                 tk.Label(tableau_epargne, text=value[0]),
                 tk.Label(tableau_epargne, text=value[1]),
-                tk.Button(tableau_epargne, text="Supprimer", command=lambda k=key: self.delete_saving_account(k)),
+                tk.Label(tableau_epargne, text=value[2]),
+                tk.Button(tableau_epargne, text="Supprimer", command=lambda k=key: self.delete_saving_account(k))
             ]
             for j, label in enumerate(labels):
                 label.grid(row=i + 1, column=j, padx=1, pady=1, sticky=tk.NSEW)

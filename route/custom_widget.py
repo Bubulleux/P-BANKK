@@ -10,12 +10,12 @@ def create_table(parent, row, col, headers, rows):
     table = tk.Frame(parent)
     for i, header in enumerate(headers):
         label = tk.Label(table, text=header)
-        label.grid(0, i, padx=1, pady=1)
+        label.grid(row=0, column=i, padx=1, pady=1)
     for j, row in enumerate(rows):
         for i, value in enumerate(row):
             label = tk.Label(table, text=value)
-            label.grid(j + 1, i, padx=1, pady=1)
-    table.grid(row, col)
+            label.grid(row=j + 1, column=i, padx=1, pady=1)
+    table.grid(row=row, column=col)
 
 
 def destroy_widgets(parent):

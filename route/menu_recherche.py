@@ -33,7 +33,10 @@ class MenuRecherche(Page):
             tk.Label(tableau_result)
         ]
         for i, header in enumerate(headers):
-            header.grid(row=0, column=i, padx=1, pady=1, sticky=tk.NSEW)
+            if header.cget("text") == "":
+                header.grid(row=0, column=i, sticky=tk.NSEW)
+            else:
+                header.grid(row=0, column=i, padx=1, pady=1, sticky=tk.NSEW)
         for i, (key, value) in enumerate(self.search_client.items()):
             labels = [
                 tk.Label(tableau_result, text=value[0]),
