@@ -16,6 +16,12 @@ def menu(win, text_list, function_list,name):
         create_button(win,i + 1,0, text_list[i], function_list[i])
 
 def menu_client(win, comptes_courant, comptes_epargne):
+    """
+    comptes_courant et comptes_epargne sont des listes contenant :
+        - les headers (qui s'affichent en haut des tableaux)
+        - chaque ligne contenant ses valeurs
+    """
+
     tableau_courant = tk.Frame(win, background="black")
     tableau_epargne = tk.Frame(win, background="black")
 
