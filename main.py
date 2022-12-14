@@ -11,7 +11,7 @@ def main_menu(window,db):
 
 def input_menu(win,text,function):
     widgets.destroy_widgets(win)
-    return widgets.menu_recherche(win,text)
+    print(widgets.menu_recherche(win,text))
     
 def client_menu(win,dat):
     widgets.menu_client()
