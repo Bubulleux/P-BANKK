@@ -22,7 +22,7 @@ class BankDBHandler:
                               "FROM currents_accounts WHERE client_id = ?", (client_id,)).fetchall()
         return {account_id: (sold, overdraft) for account_id, _, sold, overdraft in data}
 
-    def get_client_saving_account(self, client_id):
+    def get_client_saving_accounts(self, client_id):
         data = self.c.execute("SELECT id_account, client_id, sold, rate "
                               "FROM savings_accounts WHERE client_id = ?", (client_id,)).fetchall()
         return {account_id: (sold, rate) for account_id, _, sold, rate in data}
@@ -35,12 +35,12 @@ class BankDBHandler:
         data = self.c.execute("SELECT id_account, client_id, sold, rate FROM savings_accounts").fetchall()
         return {account_id: (client_id, sold, rate) for account_id, client_id, sold, rate in data}
 
-    def get_current_accounts_by_id(self, account_id):
+    def get_client_current_accounts_by_id(self, account_id):
         data = self.c.execute("SELECT client_id, sold, overdraft FROM currents_accounts WHERE id_account = ?",
                               (account_id,)).fetchone()
         return data
 
-    def get_saving_accounts_by_id(self, account_id):
+    def get_client_saving_accounts_by_id(self, account_id):
         data = self.c.execute("SELECT client_id, sold, rate FROM savings_accounts WHERE id_account = ?",
                               (account_id,)).fetchone()
         return data
