@@ -52,15 +52,15 @@ class BankDBHandler:
         self.connection.commit()
 
     def set_accounts_overdraft(self, account_id, new_value):
-        if new_value > 0 or self.get_current_accounts_by_id(account_id) is None:
+        if new_value > 0 or self.get_client_current_accounts_by_id(account_id) is None:
             return False
         self.c.execute("UPDATE currents_accounts SET overdraft = ? WHERE id_account = ?", (new_value, account_id))
         self.connection.commit()
         return True
 
     def transfer_money(self, output_account, input_account, transfer_value):
-        output_sold = self.get_current_accounts_by_id(output_account)[1]
-        input_sold = self.get_current_accounts_by_id(input_account)[1]
+        output_sold = self.get_client_current_accounts_by_id(output_account)[1]
+        input_sold = self.get_client_current_accounts_by_id(input_account)[1]
         self.c.execute("UPDATE currents_accounts SET sold = ? WHERE id_account = ?",
                        (output_sold - transfer_value, output_account))
         self.c.execute("UPDATE currents_accounts SET sold = ? WHERE id_account = ?",
@@ -68,14 +68,14 @@ class BankDBHandler:
         self.connection.commit()
 
     def delete_current_account(self, account_id):
-        if self.get_current_accounts_by_id(account_id) is None:
+        if self.get_client_current_accounts_by_id(account_id) is None:
             return False
         self.c.execute("DELETE FROM currents_accounts WHERE id_account = ?", (account_id,))
         self.connection.commit()
         return True
 
     def delete_saving_account(self, account_id):
-        if self.get_saving_accounts_by_id(account_id) is None:
+        if self.get_client_saving_accounts_by_id(account_id) is None:
             return False
         self.c.execute("DELETE FROM savings_accounts WHERE id_account = ?", (account_id,))
         self.connection.commit()
@@ -83,12 +83,12 @@ class BankDBHandler:
 
     def delete_client(self, client_id, forced=False):
         if not forced and (self.get_client_current_accounts(client_id) != {} or
-                           self.get_client_saving_account(client_id) != {}):
+                           self.get_client_saving_accounts(client_id) != {}):
             return False
 
         for account_id in self.get_client_current_accounts(client_id):
             self.delete_current_account(account_id)
-        for account_id in self.get_client_saving_account(client_id):
+        for account_id in self.get_client_saving_accounts(client_id):
             self.delete_saving_account(account_id)
 
         self.c.execute("DELETE FROM clients WHERE id_client = ?", (client_id,))
