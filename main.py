@@ -9,13 +9,13 @@ def main_menu(window,db):
     widgets.destroy_widgets(window)
     widgets.menu(window, ["Rechercher", "Ajouter", "Modifier", "Quitter"], [lambda: search(window,db),lambda: look_at(window,db),lambda: update(window,db), window.destroy], "Un titre")
 
-def rechercher(text):
+def rechercher(text,db):
     # Bla bla bla tu recherches dans la database et tu l'affiches en appelant d'autres fonctions de wigets
     print(text)
 
-def input_menu(win,text):
+def input_menu(win,text,db):
     widgets.destroy_widgets(win)
-    print(widgets.menu_recherche(win,text,rechercher))
+    (widgets.menu_recherche(win,db,text,rechercher))
     
 def client_menu(win,dat):
     widgets.menu_client()
