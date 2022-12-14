@@ -9,6 +9,12 @@ def destroy_widgets(parent):
     for child in parent.winfo_children():
         child.destroy()
 
+def menu(win, text_list, function_list,name):
+    name=tk.Label(win,text=name)
+    name.grid(row=0, column=0)
+    for i in range(len(text_list)):
+        create_button(win,i + 1,0, text_list[i], function_list[i])
+
 def menu_client(win, comptes_courant, comptes_epargne):
     tableau_courant = tk.Frame(win, background="black")
     tableau_epargne = tk.Frame(win, background="black")
@@ -33,7 +39,8 @@ def menu_client(win, comptes_courant, comptes_epargne):
     tableau_epargne.grid(row=0, column=1)
 
 def menu_recherche(win, text):
-    bar = tk.Entry(win)
+    search = tk.StringVar()
+    bar = tk.Entry(win, width=30, textvariable=search)
     bar.insert(0, text)
 
     send = tk.Button(win, text="Rechercher")
@@ -41,8 +48,4 @@ def menu_recherche(win, text):
     bar.grid(row=0, column=0)
     send.grid(row=0, column=1)
 
-def menu(win, text_list, function_list,name):
-    name=tk.Label(win,text=name)
-    name.grid(row=0, column=0)
-    for i in range(len(text_list)):
-        create_button(win,i + 1,0, text_list[i], function_list[i])
+    return search
