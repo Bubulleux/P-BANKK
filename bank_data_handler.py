@@ -94,3 +94,8 @@ class BankDBHandler:
         self.c.execute("DELETE FROM clients WHERE id_client = ?", (client_id,))
         self.connection.commit()
         return True
+    
+    def get_email_when_decouvert(self,):
+        data = self.c.execute("SELECT email FROM clients JOIN currents_accounts on id_client = client_id where sold<=0").fetchall()
+        return data
+        

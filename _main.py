@@ -35,6 +35,10 @@ class App:
     def go_to_money_transfer_page(self, account_id):
         self.page = route.MoneyTransferPage(self, account_id)
         self.draw()
+        
+    def go_to_email_page(self):
+        self.page = EmailPage(self)
+        self.draw()
 
     def draw(self):
         route.custom_widget.destroy_widgets(self.window)
