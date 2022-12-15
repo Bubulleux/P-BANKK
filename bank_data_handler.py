@@ -59,13 +59,17 @@ class BankDBHandler:
         return True
 
     def transfer_money(self, output_account, input_account, transfer_value):
-        output_sold = self.get_client_current_accounts_by_id(output_account)[1]
+        _, output_sold, output_overdraft = self.get_client_current_accounts_by_id(output_account)
         input_sold = self.get_client_current_accounts_by_id(input_account)[1]
+        if output_sold - transfer_value < output_overdraft:
+            return False
         self.c.execute("UPDATE currents_accounts SET sold = ? WHERE id_account = ?",
                        (output_sold - transfer_value, output_account))
         self.c.execute("UPDATE currents_accounts SET sold = ? WHERE id_account = ?",
                        (input_sold + transfer_value, input_account))
         self.connection.commit()
+        return True
+
 
     def delete_current_account(self, account_id):
         if self.get_client_current_accounts_by_id(account_id) is None:

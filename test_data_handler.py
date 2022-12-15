@@ -24,15 +24,15 @@ def test_get_client_by_id():
 
 def test_get_client_banks_current_accounts():
     db = init()
-    assert db.get_client_current_accounts(1) == {1: (501.01, -2)}
-    assert db.get_client_current_accounts(2) == {2: (1763987.0, -2000000.0), 3: (508539.0, -100000.0)}
+    assert db.get_client_current_accounts(1) == {1: (1, 501.01, -2)}
+    assert db.get_client_current_accounts(2) == {2: (2, 1763987.0, -2000000.0), 3: (3, 508539.0, -100000.0)}
     assert db.get_client_current_accounts(-1) == {}
     db.close()
 
 
 def test_get_client_saving_account():
     db = init()
-    assert db.get_client_saving_accounts(2) == {2: (8299, 1.9), 3: (88923, 5)}
+    assert db.get_client_saving_accounts(2) == {2: (2, 8299, 1.9), 3: (3, 88923, 5)}
     assert db.get_client_saving_accounts(-1) == {}
     db.close()
 

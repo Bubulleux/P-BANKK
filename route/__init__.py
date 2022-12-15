@@ -5,4 +5,5 @@ from route.client_page import ClientPage
 from route.current_account_page import CurrentAccountPage
 from route.money_transfer_page import MoneyTransferPage
 from route.email_page import EmailPage
+from route.saving_account_list import SavingAccountPage
 import route.custom_widget as custom_widget

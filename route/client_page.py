@@ -35,7 +35,7 @@ class ClientPage(Page):
         tk.Label(window, text="Id du client").grid(row=0, column=0)
         tk.Entry(window, width=20, textvariable=self.id_entry).grid(row=0, column=1)
         custom_widget.create_button(window, 0, 2, "Rechercher", self.update_data)
-        custom_widget.create_button(window, 0, 3, "Menu", self.app.go_to_main_menu)
+        custom_widget.create_button(window, 0, 4, "Menu", self.app.go_to_main_menu)
 
         if self.client_id is None:
             tk.Label(window, text="Aucun client trouvé").grid(row=1, column=0)
@@ -45,7 +45,8 @@ class ClientPage(Page):
         tk.Label(window, text=f"Email du client: {self.client_email}").grid(row=2, column=0)
 
         tk.Label(window, text=f"Comptes courrant:").grid(row=3, column=0)
-        tk.Label(window, text=f"Comptes épargne:").grid(row=3, column=2)
+        tk.Label(window, text=f"Comptes épargne:").grid(row=3, column=3)
+        tk.Label(window, text="  ").grid(row=4, column=2)
 
         tableau_courant = tk.Frame(window, background="black")
         tableau_epargne = tk.Frame(window, background="black")
@@ -94,8 +95,8 @@ class ClientPage(Page):
             for j, label in enumerate(labels):
                 label.grid(row=i + 1, column=j, padx=1, pady=1, sticky=tk.NSEW)
 
-        tableau_courant.grid(row=4, column=0, pady=2)
-        tableau_epargne.grid(row=4, column=2, pady=2)
+        tableau_courant.grid(row=4, column=0, columnspan=2)
+        tableau_epargne.grid(row=4, column=3, columnspan=2)
 
     def delete_current_account(self, account_id):
         self.app.db.delete_current_account(account_id)

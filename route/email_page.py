@@ -15,8 +15,6 @@ class EmailPage(Page):
         self.app.draw()
 
     def draw(self, window: tk.Tk):
-        barre = tk.Entry(window, width=50, textvariable=self.search_text)
-        barre.grid(row=0, column=0)
         custom_widget.create_button(window, 0, 2, "Menu", self.app.go_to_main_menu)
 
         if len(self.get_email) == 0:
@@ -25,9 +23,9 @@ class EmailPage(Page):
 
         tableau_result = tk.Frame(window, background="black")
         
-        for i, (key, value) in enumerate(self.get_email.items()):
+        for i, (email) in enumerate(self.get_email):
             labels = [
-                tk.Label(tableau_result, text=value[0]),
+                tk.Label(tableau_result, text=email),
             ]
             for j, label in enumerate(labels):
                 label.grid(row=i + 1, column=j, padx=1, pady=1, sticky=tk.NSEW)

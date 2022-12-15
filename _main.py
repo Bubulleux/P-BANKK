@@ -35,11 +35,21 @@ class App:
     def go_to_money_transfer_page(self, account_id):
         self.page = route.MoneyTransferPage(self, account_id)
         self.draw()
-        
-    #unfinished content
-    #def go_to_email_page(self):
-     #   self.page = EmailPage(self)
-      #  self.draw()
+
+    def go_to_email_page(self):
+        self.page = route.EmailPage(self)
+        self.draw()
+
+    def go_to_transfer_page(self):
+        self.page = route.MoneyTransferPage(self)
+        self.draw()
+
+    def go_to_all_saving_account(self):
+        self.page = route.SavingAccountPage(self)
+        self.draw()
+
+    def reset_data_base(self):
+        init_db.init()
 
     def draw(self):
         route.custom_widget.destroy_widgets(self.window)
@@ -50,7 +60,6 @@ class App:
 
 
 def main():
-    init_db.init()
     db = bank_data_handler.BankDBHandler("data_base.db")
     app = App(db)
     app.main_loop()
