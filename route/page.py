@@ -1,5 +1,5 @@
 import tkinter as tk
-from _main import App
+from main import App
 
 class Page:
     def __init__(self, app):
