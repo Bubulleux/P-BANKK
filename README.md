@@ -1,4 +1,4 @@
-# P-BANKK
+# P-BANK
 projet fait par :
     - Loup Pigeaud-Chessé
     - Ulysse Touzé-Buord
