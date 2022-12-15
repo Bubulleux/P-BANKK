@@ -34,9 +34,10 @@ INSERT INTO clients(id_client, name, email) VALUES
 
 INSERT INTO currents_accounts(client_id, sold, overdraft) VALUES
     (1, 501.01, -2),
+    (1, -20, -50),
     (2, 1763987, -2000000),
     (2, 508539, -100000),
-    (3, 328, -500),
+    (3, -100, -500),
     (4, 1837, -1),
     (5, 3, 0),
     (4, 158, 0);
